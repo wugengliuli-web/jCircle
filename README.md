@@ -1,0 +1,1 @@
+yarn && yarn dev:weapp && yarn mock
