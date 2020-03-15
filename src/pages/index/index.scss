@@ -7,7 +7,7 @@ page {
 }
 
 .container {
-    margin-bottom: 200px;
+    margin-bottom: 150px;
     .noData {
         height: 500px;
         line-height: 500px;
@@ -15,5 +15,11 @@ page {
     }
     .contentWrapper {
         
+    }
+
+    .more {
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
     }
 }

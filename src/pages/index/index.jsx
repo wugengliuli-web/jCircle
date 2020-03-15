@@ -15,6 +15,9 @@ class Index extends Component {
 	state = {
 		loading: true
 	}
+	config = {
+		navigationBarTitleText: '首页'
+	}
 
 	async componentDidMount() {
 		let { dispatch } = this.props
@@ -47,7 +50,7 @@ class Index extends Component {
 
 	render() {
 		let { loading } = this.state
-		let { info } = this.props.home
+		let { info, hasMore } = this.props.home
 		return (
 			<View className="container">
 				{
@@ -89,9 +92,46 @@ class Index extends Component {
 					loading={loading}
 					animateName={'elastic'}
 				></Skeleton>
+				{
+					loading ?
+					null
+					:
+					<View onClick={this.getMore} className="more">{hasMore ? '加载更多' : '已无更多'}</View>
+				}
 				<TabBar InitIndex={0} />
 			</View>
 		)
+	}
+
+
+	getMore = async () => {
+		let { hasMore } = this.props.home
+		if(!hasMore) return
+		let { dispatch } = this.props
+		this.setState({
+			loading: true
+		})
+		try {
+			const action = getHomeInfo(this.pageIndex, this.size)
+			const result = await dispatch(action)
+			if(!result) {
+				Taro.showToast({
+					title: '请求出错了',
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		} catch(err) {
+			Taro.showToast({
+				title: '请求出错了',
+				icon: 'none',
+				duration: 2000
+			})
+		}
+		this.pageIndex++
+		this.setState({
+			loading: false
+		})
 	}
 }
 

@@ -46,13 +46,23 @@ class TabBar extends Component {
         )
     }
 
-    link = index => {
+    link = async index => {
         if(index === 0) {
 
         } else if(index === 1) {
 
         } else {
-
+            //如果是点击的个人界面
+            const res = await Taro.getSetting()
+            let { authSetting } = res
+            if(authSetting['scope.userInfo']) {
+                //如果已经获得授权
+            } else {
+                //没有授权就获取授权
+                let req = await Taro.getUserInfo({
+                    
+                })
+            }
         }
     }
 }
