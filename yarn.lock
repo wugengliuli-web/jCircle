@@ -9166,10 +9166,10 @@ tar@^2.0.0:
     fstream "^1.0.12"
     inherits "2"
 
-taro-ui@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.npm.taobao.org/taro-ui/download/taro-ui-2.3.0.tgz#1094cd0c9e4c50c6ac08ca19409c55408f46e32a"
-  integrity sha1-EJTNDJ5MUMasCMoZQJxVQI9G4yo=
+taro-ui@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.npm.taobao.org/taro-ui/download/taro-ui-2.3.1.tgz#d2107700492a36dc4e0d53bb11525a0da4892fec"
+  integrity sha1-0hB3AEkqNtxODVO7EVJaDaSJL+w=
   dependencies:
     "@types/react" "^16.7.3"
     bind-decorator "^1.0.11"
