@@ -1,13 +1,19 @@
 import Taro, { Component } from '@tarojs/taro'
 import PropTypes from 'prop-types';
-import { View, Image } from '@tarojs/components'
+import { View, Image, Input } from '@tarojs/components'
 import './index.scss'
 import { AtIcon } from 'taro-ui'
 //动态组件
 class Dynamic extends Component {
+
+
+    state = {
+        value: ''
+    }
+
     render() {
         let { 
-            id,
+            userId,
             name,
             avatar,
             text,
@@ -54,6 +60,16 @@ class Dynamic extends Component {
                         <AtIcon value={isHeart ? 'heart-2' : 'heart'} size='16' color={isHeart ? 'red' : '#999'}></AtIcon>
                     </View>
                 </View>
+                <View className="inputWrapper">
+                    <Input
+                        className="input"
+                        type='text'
+                        placeholder='评论'
+                        value={this.state.value}
+                        onInput={this.handleChange}
+                        onConfirm={this.submit}
+                    />
+                </View>
             </View>
         )
     }
@@ -78,10 +94,23 @@ class Dynamic extends Component {
         }
         Taro.hideLoading()
     }
+
+    //修改评论
+    handleChange = e => {
+        let { target: { value } } = e
+        this.setState({
+            value
+        })
+    }
+
+    //提交评论
+    submit = async () => {
+        console.log('submit')
+    }
 }
 
 Dynamic.propTypes = {
-    id: PropTypes.number.isRequired,  //id
+    userId: PropTypes.string.isRequired,  //id
     name: PropTypes.string.isRequired,  //名字
     avatar: PropTypes.string.isRequired,  //头像
     text: PropTypes.string.isRequired,  //动态内容

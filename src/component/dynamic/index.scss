@@ -1,4 +1,5 @@
 @import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/input.scss";
 .dynamicContainer {
     padding: 16px;
     margin: 16px 0;
@@ -59,6 +60,16 @@
             display: flex;
             align-items: center;
             margin-bottom: 5px;
+        }
+    }
+
+    .inputWrapper {
+        margin: 16px 0;
+        .input {
+            padding: 0 16px;
+            font-size: 16px;
+            border-radius: 8px;
+            background-color: #f6f8facc;
         }
     }
 }

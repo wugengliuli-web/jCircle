@@ -63,7 +63,7 @@ class Index extends Component {
 								return <Dynamic
 									className='dynamicWrapper' 
 									key={item.id}
-									id={item.id}  //用户id
+									userId={item.id}  //用户id
 									name={item.name}  //用户名
 									avatar={item.avatar} //用户头像
 									text={item.text}  //用户动态内容
