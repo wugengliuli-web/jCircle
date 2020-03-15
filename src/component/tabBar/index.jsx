@@ -7,6 +7,7 @@ import Yizan_sel from '../../static/img/Yizan_sel.png'
 import Yizan_unsel from '../../static/img/Yizan_unsel.png'
 import mine_sel from '../../static/img/mine_sel.png'
 import mine_unsel from '../../static/img/mine_unsel.png'
+import './index.scss'
 class TabBar extends Component {
     static defaultProps = {
         InitIndex: 0
@@ -16,6 +17,7 @@ class TabBar extends Component {
         let { InitIndex } = this.props
         return (
             <AtTabBar
+                className="tabBar"
                 fixed
                 backgroundColor={'#fff'}
                 color="rgba(0,0,0,0.3)"
@@ -50,13 +52,13 @@ class TabBar extends Component {
         } else if(index === 1) {
 
         } else {
-            
+
         }
     }
 }
 
 TabBar.propTypes = {
-    InitIndex: PropTypes.string.isRequired
+    InitIndex: PropTypes.number.isRequired
 }
 
 export default TabBar

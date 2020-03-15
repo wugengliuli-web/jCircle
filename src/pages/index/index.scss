@@ -1,2 +1,19 @@
 @import "~taro-ui/dist/style/components/tab-bar.scss";
 @import "~taro-ui/dist/style/components/badge.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+page {
+    background:rgba(245,246,250,1);
+    height: 100%;
+}
+
+.container {
+    margin-bottom: 200px;
+    .noData {
+        height: 500px;
+        line-height: 500px;
+        text-align: center;
+    }
+    .contentWrapper {
+        
+    }
+}

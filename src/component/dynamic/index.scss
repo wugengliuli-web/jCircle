@@ -1,0 +1,64 @@
+@import "~taro-ui/dist/style/components/icon.scss";
+.dynamicContainer {
+    padding: 16px;
+    margin: 16px 0;
+    background-color: #fff;
+    .header {
+        display: flex;
+        .left {
+            display: flex;
+            align-items: center;
+            .avatar {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+            }
+        }
+        .right {
+            margin-left: 16px;
+            .name {
+                font-size: 28px;
+                color:rgba(0,0,0,0.87);
+            }
+            .time {
+                font-size:24px;
+                color:rgba(0,0,0,0.54);
+            }
+        }
+    }
+
+    .contentWrapper {
+        margin-top: 16px;
+        .textWrapper {
+            font-size: 30px;
+            color:rgba(0,0,0,0.87);
+        }
+        .postContainer {
+            display: flex;
+            margin-top: 16px;
+            .poster {
+                width: 100%;
+                flex: 1;
+                margin: 3px;
+                height: 300px;
+            }
+        }
+    }
+
+    .thumbsUpWrapper {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .left {
+            font-size: 24px;
+            color:rgba(0,0,0,0.54);
+        }
+        .right {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+    }
+}
