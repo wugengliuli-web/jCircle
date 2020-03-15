@@ -50,20 +50,33 @@ class Dynamic extends Component {
                 </View>
                 <View className="thumbsUpWrapper">
                     <View className="left">点赞数: {thumbsUp}</View>
-                    <View className="right">
+                    <View className="right" onClick={() => turnHeart(index)}>
                         <AtIcon value={isHeart ? 'heart-2' : 'heart'} size='16' color={isHeart ? 'red' : '#999'}></AtIcon>
                     </View>
                 </View>
             </View>
         )
     }
-
+    //浏览图片
     viewImage = index => {
         let { poster } = this.props
         Taro.previewImage({
             current: poster[index],
             urls: poster
         })
+    }
+    //点赞
+    turnHeart = async index => {
+        const { dispatch } = this.props
+        Taro.showLoading({
+            title: '点赞中'
+        })
+        try {
+
+        } catch(err) {
+
+        }
+        Taro.hideLoading()
     }
 }
 
