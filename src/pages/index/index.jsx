@@ -8,9 +8,6 @@ import Skeleton from 'taro-skeleton'
 import Dynamic from '../../component/dynamic/index'
 @connect(({ home }) => ({ home }))
 class Index extends Component {
-
-	hasAjax = false
-	pageIndex = 1  //请求页数
 	size = 6  //每页请求多少个
 	state = {
 		loading: true
@@ -20,12 +17,12 @@ class Index extends Component {
 	}
 
 	async componentDidMount() {
+		const { hasAjax, pageIndex } = this.props.home
 		let { dispatch } = this.props
-		if(!this.hasAjax) {
+		if(!hasAjax) {
 			// 如果还未发送请求
-			this.hasAjax = true
 			try {
-				const action = getHomeInfoAction(this.pageIndex, this.size)
+				const action = getHomeInfoAction(pageIndex, this.size)
 				const result = await dispatch(action)
 				if(!result) {
 					Taro.showToast({
@@ -41,7 +38,10 @@ class Index extends Component {
 					duration: 2000
 				})
 			}
-			this.pageIndex++
+			this.setState({
+				loading: false
+			})
+		} else {
 			this.setState({
 				loading: false
 			})
@@ -106,6 +106,7 @@ class Index extends Component {
 
 
 	getMore = async () => {
+		let { pageIndex } = this.props.home
 		let { hasMore } = this.props.home
 		if(!hasMore) return
 		let { dispatch } = this.props
@@ -113,7 +114,7 @@ class Index extends Component {
 			loading: true
 		})
 		try {
-			const action = getHomeInfoAction(this.pageIndex, this.size)
+			const action = getHomeInfoAction(pageIndex, this.size)
 			const result = await dispatch(action)
 			if(!result) {
 				Taro.showToast({
@@ -129,7 +130,6 @@ class Index extends Component {
 				duration: 2000
 			})
 		}
-		this.pageIndex++
 		this.setState({
 			loading: false
 		})

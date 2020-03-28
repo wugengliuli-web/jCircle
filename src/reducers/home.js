@@ -8,7 +8,9 @@ import {
 } from '../constants/releaseDynamics'
 const InitState = {
     info: [],
-    hasMore: true
+    hasMore: true,
+    pageIndex: 1,  //请求页数
+	hasAjax: false
 }
 
 
@@ -20,7 +22,9 @@ export const home = (state = InitState, action) => {
             return {
                 ...state,
                 info: state.info.concat(data),
-                hasMore: data.length === 6 ? true : false
+                hasMore: data.length === 6 ? true : false,
+                hasAjax: true,
+                pageIndex: state.pageIndex + 1
             }
         case set_heart:
             let { isHeart, index } = data

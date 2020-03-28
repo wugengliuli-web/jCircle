@@ -8,7 +8,9 @@ import { addDynamicAction } from '../../actions/releaseDynamics'
 
 @connect(({ userInfo }) => ({ userInfo }))
 class ReleaseDynamics extends Component {
-
+    config = {
+		navigationBarTitleText: '发布动态'
+    }
     state = {
         val: '',
         poster: [],

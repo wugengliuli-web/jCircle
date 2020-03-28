@@ -81,7 +81,6 @@ class TabBar extends Component {
                     signature, //个性签名
                     iv
                 } = req
-                console.log(req)
                 //拿到信息后存储到store中
                 const { dispatch } = this.props
                 const action = setUserInfoAction({
