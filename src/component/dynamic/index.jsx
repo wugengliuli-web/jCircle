@@ -109,27 +109,27 @@ class Dynamic extends Component {
         }
         const { userInfo: { iv, nickName }, dynamicID, isHeart } = this.props
         Taro.showLoading({
-            title: '点赞中'
+            title: !isHeart ? '点赞中' : '取消中'
         })
         try {
             const action = setHeartAction(iv, dynamicID, !isHeart, index)
             const res = await dispatch(action)
             if(res) {
                 Taro.showToast({
-                    title: '点赞成功',
+                    title: !isHeart ? '点赞成功' : '取消成功',
                     icon: 'success',
                     duration: 2000
                 })
             } else {
                 Taro.showToast({
-                    title: '点赞失败',
+                    title: !isHeart ? '点赞失败' : '取消失败',
                     icon: 'none',
                     duration: 2000
                 })
             }
         } catch(err) {
             Taro.showToast({
-                title: '点赞失败',
+                title: !isHeart ? '点赞失败' : '取消失败',
                 icon: 'none',
                 duration: 2000
             })

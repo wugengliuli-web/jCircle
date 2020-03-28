@@ -23,7 +23,11 @@ export const home = (state = InitState, action) => {
         case set_heart:
             let { isHeart, index } = data
             info[index].isHeart = isHeart
-            info[index].thumbsUp++
+            if(isHeart) {
+                info[index].thumbsUp++
+            } else {
+                info[index].thumbsUp--
+            }
             return {
                 ...state,
                 info
