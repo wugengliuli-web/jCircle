@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import './index.scss'
 import TabBar from '../../component/tabBar/index'
 import { connect } from '@tarojs/redux'
-import { getHomeInfo } from '../../actions/home'
+import { getHomeInfoAction } from '../../actions/home'
 import Skeleton from 'taro-skeleton'
 import Dynamic from '../../component/dynamic/index'
 @connect(({ home }) => ({ home }))
@@ -25,7 +25,7 @@ class Index extends Component {
 			// 如果还未发送请求
 			this.hasAjax = true
 			try {
-				const action = getHomeInfo(this.pageIndex, this.size)
+				const action = getHomeInfoAction(this.pageIndex, this.size)
 				const result = await dispatch(action)
 				if(!result) {
 					Taro.showToast({
@@ -73,6 +73,7 @@ class Index extends Component {
 									time={item.time}
 									isHeart={item.isHeart ? true : false}
 									index={index}
+									dynamicID={item.dynamicID}  //活动id
 								/>
 							})
 						}
@@ -112,7 +113,7 @@ class Index extends Component {
 			loading: true
 		})
 		try {
-			const action = getHomeInfo(this.pageIndex, this.size)
+			const action = getHomeInfoAction(this.pageIndex, this.size)
 			const result = await dispatch(action)
 			if(!result) {
 				Taro.showToast({

@@ -1,0 +1,1 @@
+export const set_userInfo = 'SET_USERINFO'

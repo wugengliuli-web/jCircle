@@ -1,0 +1,72 @@
+@import "~taro-ui/dist/style/components/tab-bar.scss";
+@import "~taro-ui/dist/style/components/badge.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+page {
+    background:rgba(245,246,250,1);
+}
+
+.container {
+    .head {
+        padding: 32px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        background:radial-gradient(circle,rgba(0,183,191,1) 0%,rgba(85,255,214,1) 100%);
+        .left {
+            display: flex;
+            .headImg {
+                .img {
+                    width: 96px;
+                    height: 96px;
+                    border-radius: 50%;
+                }
+            }
+            .UserInfo {
+                margin-left: 16px;
+                .name {
+                    font-size:40px;
+                    color: #fff;
+                    font-weight:bold;
+                }
+                .signature {
+                    margin-top: 16px;
+                    color: #fff;
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+    .contentWrapper {
+        background-color: #fff;
+        padding: 24px 32px;
+        height: 288px;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        margin-top: 16px;
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            .wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                .left {
+                    align-items: center;
+                    display: flex;
+                    .img {
+                        width: 48px;
+                        height: 48px;
+                    }
+                    .title {
+                        margin-left: 16px;
+                        font-size:24px;
+                        color:rgba(0,0,0,0.87);
+                    }
+                }
+            }
+        }
+    }
+}

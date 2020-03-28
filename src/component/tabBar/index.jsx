@@ -8,6 +8,9 @@ import Yizan_unsel from '../../static/img/Yizan_unsel.png'
 import mine_sel from '../../static/img/mine_sel.png'
 import mine_unsel from '../../static/img/mine_unsel.png'
 import './index.scss'
+import { connect } from '@tarojs/redux'
+import { setUserInfoAction } from '../../actions/userInfo'
+@connect(({ userInfo }) => ({ userInfo }))
 class TabBar extends Component {
     static defaultProps = {
         InitIndex: 0
@@ -47,20 +50,54 @@ class TabBar extends Component {
     }
 
     link = async index => {
+        let { InitIndex } = this.props
         if(index === 0) {
-
+            if(InitIndex === 0) return
+            Taro.redirectTo({
+                url: '/pages/index/index'
+            })
         } else if(index === 1) {
-
+            if(InitIndex === 1) return
         } else {
+            if(InitIndex === 2) return
+            let { userInfo: { iv } } = this.props
+            if(iv) {
+                Taro.redirectTo({
+                    url: '/pages/personalCenter/index'
+                })
+                return
+            }
             //如果是点击的个人界面
             const res = await Taro.getSetting()
             let { authSetting } = res
             if(authSetting['scope.userInfo']) {
                 //如果已经获得授权
+                const req = await Taro.getUserInfo()
+                let {
+                    userInfo: {
+                        avatarUrl, //头像地址
+                        nickName, //用户名
+                    },
+                    signature, //个性签名
+                    iv
+                } = req
+                console.log(req)
+                //拿到信息后存储到store中
+                const { dispatch } = this.props
+                const action = setUserInfoAction({
+                    avatarUrl,
+                    nickName,
+                    signature,
+                    iv
+                })
+                await dispatch(action)
+                Taro.redirectTo({
+                    url: '/pages/personalCenter/index'
+                })
             } else {
-                //没有授权就获取授权
-                let req = await Taro.getUserInfo({
-                    
+                //没有授权就跳转到登录页面
+                Taro.redirectTo({
+                    url: '/pages/login/index'
                 })
             }
         }

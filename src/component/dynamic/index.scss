@@ -20,6 +20,7 @@
             .name {
                 font-size: 28px;
                 color:rgba(0,0,0,0.87);
+                white-space: nowrap;
             }
             .time {
                 font-size:24px;
@@ -60,6 +61,18 @@
             display: flex;
             align-items: center;
             margin-bottom: 5px;
+        }
+    }
+
+    .commentWrapper {
+        .comment {
+            margin: 4px 0;
+            display: flex;
+            font-size: 20px;
+            color:rgba(0,0,0,0.87);
+            .name {
+                color: rgba(16, 142, 233, 0.87);
+            }
         }
     }
 
