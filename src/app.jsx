@@ -21,7 +21,8 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/login/index',
-      'pages/personalCenter/index'
+      'pages/personalCenter/index',
+      'pages/releaseDynamics/index'
     ],
     window: {
       backgroundTextStyle: 'light',

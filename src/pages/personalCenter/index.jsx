@@ -23,7 +23,7 @@ class PersonalCenter extends Component {
     }, {
         icon: application,
         title: '发布动态',
-        url: ''
+        url: '/pages/releaseDynamics/index'
     }]
     render() {
         let {

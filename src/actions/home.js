@@ -16,6 +16,7 @@ export const getHomeInfoAction = (pageIndex, size) => {
             }
         })
         let { data: { data, result } } = res
+        data.sort((a,b) => -a.time.localeCompare(b.time))
         if(result === 0) {
             await dispatch({
                 type: set_homeInfo,

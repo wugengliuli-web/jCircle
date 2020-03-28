@@ -3,7 +3,9 @@ import {
     set_heart,
     set_comment
 } from '../constants/home'
-
+import {
+    add_dynamic
+} from '../constants/releaseDynamics'
 const InitState = {
     info: [],
     hasMore: true
@@ -42,6 +44,12 @@ export const home = (state = InitState, action) => {
                 commentName: nickName,
                 comment
             })
+            return {
+                ...state,
+                info
+            }
+        case add_dynamic:
+            info.unshift(data)
             return {
                 ...state,
                 info

@@ -32,6 +32,23 @@ const data = {
         res.status('200').json({
             result: 0
         })
+    },
+    'POST /api/addDynamic': (req, res) => {
+        let { body: { userID, nickName, value, poster, avatarUrl } } = req
+        res.status('200').json(Mock.mock({
+            result: 0,
+            data: {
+                dynamicID: '@id', //动态id
+                id: userID,
+                name: nickName,
+                text: value,
+                comment: [],
+                thumbsUp: 0,
+                poster,
+                time: '@now',
+                avatar: avatarUrl
+            }
+        }))
     }
 }
 
