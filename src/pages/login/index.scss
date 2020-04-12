@@ -4,5 +4,25 @@ page {
 
 
 .container {
-    
+  text-align: center;
+}
+
+.loginBtn{
+  background: rgb(0,192,0);
+  color: white;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.loginImg{
+  margin-top: 50px;
+  border-radius: 100px;
+  background-color: white;
+  width: 200px;
+  height: 200px;
+}
+
+.loginTip{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
