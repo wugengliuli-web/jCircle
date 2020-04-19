@@ -49,6 +49,28 @@ const data = {
                 avatar: avatarUrl
             }
         }))
+    },
+    'GET /api/getMyRelease': (req, res) => {
+        const { id, nickName, avatarUrl } = req.query
+        res.status('200').json(Mock.mock({
+            result: 0,
+            'data|1-2': [{
+                dynamicID: '@id', //动态id
+                id: id,  //发布人id
+                avatar: avatarUrl,  //发布人头像
+                name: nickName,  //发布人姓名
+                text: '@ctitle(10, 50)',  //内容
+                'comment|0-3': [{
+                    commentName: '@cname(3, 5)',
+                    comment: '@ctitle(10, 20)'
+                }],
+                thumbsUp: '@integer(0,50)',  //点赞数
+                'poster|0-5': [
+                    '@image(300x400, @color, @color, @word(5))'
+                ],
+                time: '@datetime'
+            }]
+        }))
     }
 }
 

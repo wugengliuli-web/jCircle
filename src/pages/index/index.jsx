@@ -38,14 +38,11 @@ class Index extends Component {
 					duration: 2000
 				})
 			}
-			this.setState({
-				loading: false
-			})
-		} else {
-			this.setState({
-				loading: false
-			})
+			
 		}
+		this.setState({
+			loading: false
+		})
 	}
 
 	render() {

@@ -15,7 +15,7 @@ class PersonalCenter extends Component {
     options = [{
         icon: activity,
         title: '我的发布',
-        url: ''
+        url: '/pages/myRelease/index'
     }, {
         icon: message,
         title: '我的消息',

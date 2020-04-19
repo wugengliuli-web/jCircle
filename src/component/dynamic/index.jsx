@@ -26,7 +26,8 @@ class Dynamic extends Component {
             poster,
             time,
             isHeart,
-            index: key
+            index: key,
+            isMy
         } = this.props
         //最多只显示3张图片
         poster = poster ? poster.slice(0, 3) : []
@@ -60,9 +61,14 @@ class Dynamic extends Component {
                 </View>
                 <View className="thumbsUpWrapper">
                     <View className="left">点赞数: {thumbsUp}</View>
-                    <View className="right" onClick={() => this.turnHeart(key)}>
-                        <AtIcon value={isHeart ? 'heart-2' : 'heart'} size='16' color={isHeart ? 'red' : '#999'}></AtIcon>
-                    </View>
+                    {
+                        isMy ?
+                        null
+                        :
+                        <View className="right" onClick={() => this.turnHeart(key)}>
+                            <AtIcon value={isHeart ? 'heart-2' : 'heart'} size='16' color={isHeart ? 'red' : '#999'}></AtIcon>
+                        </View>
+                    }
                 </View>
                 <View className="commentWrapper">
                     {
@@ -76,16 +82,21 @@ class Dynamic extends Component {
                         })
                     }
                 </View>
-                <View className="inputWrapper">
-                    <Input
-                        className="input"
-                        type='text'
-                        placeholder='评论'
-                        value={this.state.value}
-                        onInput={this.handleChange}
-                        onConfirm={() => this.submit(key)}
-                    />
-                </View>
+                {
+                    isMy ?
+                    null
+                    :
+                    <View className="inputWrapper">
+                        <Input
+                            className="input"
+                            type='text'
+                            placeholder='评论'
+                            value={this.state.value}
+                            onInput={this.handleChange}
+                            onConfirm={() => this.submit(key)}
+                        />
+                    </View>
+                }
             </View>
         )
     }
