@@ -22,7 +22,6 @@ class Login extends Component {
     }
 
     getUserInfo = async info => {
-        console.log(info)
         let { detail } = info
         let { errMsg } = detail
         if(errMsg === this.errMsg) return
