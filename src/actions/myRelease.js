@@ -4,7 +4,7 @@ import { DEVELOP_URL } from '../lib/url'
 export const getMyReleaseAction = (id, size, pageIndex, nickName, avatarUrl) => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + 'getMyRelease',
+            url: DEVELOP_URL + '/theme/add',
             data: {
                 id,
                 size,

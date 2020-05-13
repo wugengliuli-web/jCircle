@@ -6,41 +6,55 @@ import {
     set_comment
 } from '../constants/home'
 
-export const getHomeInfoAction = (pageIndex, size) => {
+export const getHomeInfoAction = (pageIndex, size, wxID = '') => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + 'getList',
+            url: DEVELOP_URL + '/theme/pageListInfo',
             data: {
-                pageIndex,
-                size
+                currentPage: pageIndex,
+                pageSize: size
             }
         })
-        let { data: { data, result } } = res
-        data.sort((a,b) => -a.time.localeCompare(b.time))
-        if(result === 0) {
+        let { data: { data: { rows }, code } } = res
+        // rows.sort((a,b) => -a.updateTime.localeCompare(b.updateTime))
+        rows = rows.map(item => {
+            let approves = item.approves
+            let isHeart = false
+            if(approves) {
+                for(let item of approves) {
+                    if(item.wexId === wxID) {
+                        isHeart = true
+                        break
+                    }
+                }
+            }
+            item['isHeart'] = isHeart
+            return item
+        })
+        if(code === 0) {
             await dispatch({
                 type: set_homeInfo,
-                data
+                data: rows,
+                pageIndex
             })
         }
-        return result === 0
+        return code === 0
     }
 }
 
 export const setHeartAction = (userId, dynamicID, isHeart, index) => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + 'setHeart',
-            method: 'POST',
+            url: DEVELOP_URL + `${isHeart ? '/approve/praise' : '/approve/cancel' }`,
+            method: `${isHeart ? 'POST' : 'PUT'}`,
             data: {
-                userId,
-                dynamicID,
-                isHeart
+                wexId: userId,
+                themeId: dynamicID,
+                praise: isHeart ? 1 : 0
             }
         })
-        let { data: { result } } = res
-        result = Number(result)
-        if(result === 0) {
+        let { data: { code } } = res
+        if(code === 0) {
             await dispatch({
                 type: set_heart,
                 data: {
@@ -49,27 +63,27 @@ export const setHeartAction = (userId, dynamicID, isHeart, index) => {
                 }
             })
         }
-        return result === 0
+        return code === 0
     }
 }
 
 
 export const setCommentAction = (userId, dynamicID, nickName, index, comment) => {
     return async dispatch => {
+        const date = new Date()
         const res = await Taro.request({
-            url: DEVELOP_URL + 'setComment',
+            url: DEVELOP_URL + '/comment/add',
             method: 'POST',
             data: {
-                userId,
-                dynamicID,
-                index,
-                nickName,
-                comment
+                themeId: dynamicID,
+                content: comment,
+                createTime: date.toLocaleString(),
+                updateTime: date.toLocaleString(),
+                wexId: userId
             }
         })
-        let { data: { result } } = res
-        result = Number(result)
-        if(result === 0) {
+        let { data: { code } } = res
+        if(code === 0) {
             await dispatch({
                 type: set_comment,
                 data: {
@@ -80,6 +94,6 @@ export const setCommentAction = (userId, dynamicID, nickName, index, comment) =>
             })
         }
 
-        return result === 0
+        return code === 0
     }
 }

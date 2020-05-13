@@ -83,9 +83,9 @@ class ReleaseDynamics extends Component {
             loading: true
         })
         try {
-            let { userInfo: { iv, nickName, avatarUrl }, dispatch } = this.props
+            let { userInfo: { iv }, dispatch } = this.props
             let { val, poster } = this.state
-            const action = addDynamicAction(iv, nickName, val, poster, avatarUrl)
+            const action = addDynamicAction(iv, val, poster)
             const res = await dispatch(action)
             if(res) {
                 Taro.showToast({

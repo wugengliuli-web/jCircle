@@ -87,7 +87,7 @@ class TabBar extends Component {
                     avatarUrl,
                     nickName,
                     signature,
-                    iv
+                    iv: signature
                 })
                 await dispatch(action)
                 Taro.redirectTo({

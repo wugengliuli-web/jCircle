@@ -15,15 +15,16 @@ class Dynamic extends Component {
     state = {
         value: ''
     }
+
     render() {
         let { 
             userId,
             name,
-            avatar,
+            avatar = '',
             text,
             comment = [],
             thumbsUp,
-            poster,
+            poster = [],
             time,
             isHeart,
             index: key,
@@ -75,8 +76,8 @@ class Dynamic extends Component {
                         comment.map((item, index) => {
                             return (
                                 <View key={String(index)} className="comment">
-                                    <View className="name">{item.commentName}</View>
-                                    <View className="commentContent">：{item.comment}</View>
+                                    <View className="name">{item.username}</View>
+                                    <View className="commentContent">：{item.content}</View>
                                 </View>
                             )
                         })
@@ -175,7 +176,6 @@ class Dynamic extends Component {
         try {
             const action = setCommentAction(iv, dynamicID, nickName, index, value)
             const res = await dispatch(action)
-            console.log(res)
             if(res) {
                 Taro.showToast({
                     title: '评论成功',
@@ -214,8 +214,7 @@ class Dynamic extends Component {
                     avatarUrl, //头像地址
                     nickName, //用户名
                 },
-                signature, //个性签名
-                iv
+                signature
             } = req
             //拿到信息后存储到store中
             const { dispatch } = this.props
@@ -223,7 +222,7 @@ class Dynamic extends Component {
                 avatarUrl,
                 nickName,
                 signature,
-                iv
+                iv: signature
             })
             await dispatch(action)
         } else {

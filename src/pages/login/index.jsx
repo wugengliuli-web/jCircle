@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from '@tarojs/redux'
-import { setUserInfoAction } from '../../actions/userInfo'
+import { setUserInfoAction, login } from '../../actions/userInfo'
 import loginImg from '../../static/img/unknown_user.png'
 
 @connect(({ userInfo }) => ({ userInfo }))
@@ -28,7 +28,6 @@ class Login extends Component {
     }
 
     getUserInfo = async info => {
-        console.log(info)
         let { detail } = info
         let { errMsg } = detail
         if (errMsg === this.errMsg) return
@@ -40,17 +39,40 @@ class Login extends Component {
             signature, //个性签名
             iv
         } = detail
-        let { dispatch } = this.props
-        const action = setUserInfoAction({
-            avatarUrl,
-            nickName,
-            signature,
-            iv
-        })
-        await dispatch(action)
-        Taro.redirectTo({
-            url: '/pages/index/index'
-        })
+        try {
+            let { dispatch } = this.props
+            const actionLogin = login({
+                avatar: avatarUrl,
+                remark: '',
+                userName: nickName,
+                wexId: signature
+            })
+            const res = dispatch(actionLogin)
+            if(res) {
+                const actionSave = setUserInfoAction({
+                    avatarUrl,
+                    nickName,
+                    signature,
+                    iv: signature
+                })
+                await dispatch(actionSave)
+                Taro.redirectTo({
+                    url: '/pages/index/index'
+                })
+            } else {
+                Taro.showToast({
+					title: '请求出错了',
+					icon: 'none',
+					duration: 2000
+				})
+            }
+        } catch(err) {
+            Taro.showToast({
+                title: '请求出错了',
+                icon: 'none',
+                duration: 2000
+            })
+        }
     }
 }
 

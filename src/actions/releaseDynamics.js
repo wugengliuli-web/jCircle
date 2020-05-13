@@ -3,27 +3,22 @@ import {
 } from '../constants/releaseDynamics'
 import { DEVELOP_URL } from '../lib/url'
 import Taro from '@tarojs/taro'
-export const addDynamicAction = (userID, nickName, value, poster, avatarUrl) => {
+export const addDynamicAction = (userID, value, poster) => {
     return async dispatch => {
+        const date = new Date()
         const res = await Taro.request({
-            url: DEVELOP_URL + 'addDynamic',
+            url: DEVELOP_URL + '/theme/add',
             method: 'POST',
             data: {
-                userID,
-                nickName,
-                value,
-                poster,
-                avatarUrl
+                wexId: userID,
+                content: value,
+                images: poster,
+                createTime: date.toLocaleString(),
+                updateTime: date.toLocaleString(),
+                status: 1
             }
         })
-        let { data: { result, data } } = res
-        result = Number(result)
-        if(result === 0) {
-            await dispatch({
-                type: add_dynamic,
-                data
-            })
-        }
-        return result === 0
+        let { data: { code } } = res
+        return code === 0
     }
 }

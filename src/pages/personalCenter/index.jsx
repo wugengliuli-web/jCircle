@@ -40,7 +40,7 @@ class PersonalCenter extends Component {
                         </View>
                         <View className="UserInfo">
                             <View className="name">{nickName}</View>
-                            <View className="signature">{signature}</View>
+                            {/* <View className="signature">{signature}</View> */}
                         </View>
                     </View>
                 </View>

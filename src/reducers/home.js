@@ -3,9 +3,6 @@ import {
     set_heart,
     set_comment
 } from '../constants/home'
-import {
-    add_dynamic
-} from '../constants/releaseDynamics'
 const InitState = {
     info: [],
     hasMore: true,
@@ -21,18 +18,17 @@ export const home = (state = InitState, action) => {
         case set_homeInfo:
             return {
                 ...state,
-                info: state.info.concat(data),
+                info: action.pageIndex === 1 ? data : info.concat(data),
                 hasMore: data.length === 6 ? true : false,
-                hasAjax: true,
                 pageIndex: state.pageIndex + 1
             }
         case set_heart:
             let { isHeart, index } = data
             info[index].isHeart = isHeart
             if(isHeart) {
-                info[index].thumbsUp++
+                info[index].approveNum++
             } else {
-                info[index].thumbsUp--
+                info[index].approveNum--
             }
             return {
                 ...state,
@@ -44,16 +40,17 @@ export const home = (state = InitState, action) => {
                 nickName,
                 comment
             } = data
-            info[commentIndex].comment.push({
-                commentName: nickName,
-                comment
-            })
-            return {
-                ...state,
-                info
+            if(info[commentIndex].comments) {
+                info[commentIndex].comments.push({
+                    username: nickName,
+                    content: comment
+                })
+            } else {
+                info[commentIndex].comments = [{
+                    username: nickName,
+                    content: comment
+                }]
             }
-        case add_dynamic:
-            info.unshift(data)
             return {
                 ...state,
                 info

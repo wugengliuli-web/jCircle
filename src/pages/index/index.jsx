@@ -6,7 +6,7 @@ import { connect } from '@tarojs/redux'
 import { getHomeInfoAction } from '../../actions/home'
 import Skeleton from 'taro-skeleton'
 import Dynamic from '../../component/dynamic/index'
-@connect(({ home }) => ({ home }))
+@connect(({ home, userInfo }) => ({ home, userInfo }))
 class Index extends Component {
 	size = 6  //每页请求多少个
 	state = {
@@ -17,28 +17,24 @@ class Index extends Component {
 	}
 
 	async componentDidMount() {
-		const { hasAjax, pageIndex } = this.props.home
+		const { userInfo: { iv: id } } = this.props
 		let { dispatch } = this.props
-		if(!hasAjax) {
-			// 如果还未发送请求
-			try {
-				const action = getHomeInfoAction(pageIndex, this.size)
-				const result = await dispatch(action)
-				if(!result) {
-					Taro.showToast({
-						title: '请求出错了',
-						icon: 'none',
-						duration: 2000
-					})
-				}
-			} catch(err) {
+		try {
+			const action = getHomeInfoAction(1, this.size, id)
+			const result = await dispatch(action)
+			if(!result) {
 				Taro.showToast({
 					title: '请求出错了',
 					icon: 'none',
 					duration: 2000
 				})
 			}
-			
+		} catch(err) {
+			Taro.showToast({
+				title: '请求出错了',
+				icon: 'none',
+				duration: 2000
+			})
 		}
 		this.setState({
 			loading: false
@@ -60,17 +56,17 @@ class Index extends Component {
 								return <Dynamic
 									className='dynamicWrapper' 
 									key={item.id}
-									userId={item.id}  //用户id
-									name={item.name}  //用户名
+									userId={item.wexId}  //用户id
+									name={item.userName}  //用户名
 									avatar={item.avatar} //用户头像
-									text={item.text}  //用户动态内容
-									comment={item.comment}  //评论
-									thumbsUp={item.thumbsUp} //点赞数
-									poster={item.poster} //动态图片
-									time={item.time}
+									text={item.content || []}  //用户动态内容
+									comment={item.comments || []}  //评论
+									thumbsUp={item.approveNum} //点赞数
+									poster={item.images || []} //动态图片
+									time={item.updateTime || ''}
 									isHeart={item.isHeart ? true : false}
 									index={index}
-									dynamicID={item.dynamicID}  //活动id
+									dynamicID={item.id}  //活动id
 								/>
 							})
 						}
@@ -103,15 +99,14 @@ class Index extends Component {
 
 
 	getMore = async () => {
-		let { pageIndex } = this.props.home
-		let { hasMore } = this.props.home
+		const { home: { hasMore, pageIndex }, userInfo: { iv: id } } = this.props
 		if(!hasMore) return
 		let { dispatch } = this.props
 		this.setState({
 			loading: true
 		})
 		try {
-			const action = getHomeInfoAction(pageIndex, this.size)
+			const action = getHomeInfoAction(pageIndex + 1, this.size, id)
 			const result = await dispatch(action)
 			if(!result) {
 				Taro.showToast({
