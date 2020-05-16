@@ -23,7 +23,8 @@ class App extends Component {
       'pages/login/index',
       'pages/personalCenter/index',
       'pages/releaseDynamics/index',
-      'pages/myRelease/index'
+      'pages/myRelease/index',
+      'pages/recommend/index'
     ],
     window: {
       backgroundTextStyle: 'light',
