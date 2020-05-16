@@ -58,6 +58,9 @@ class TabBar extends Component {
             })
         } else if(index === 1) {
             if(InitIndex === 1) return
+            Taro.redirectTo({
+                url: '/pages/recommend/index'
+            })
         } else {
             if(InitIndex === 2) return
             let { userInfo: { iv } } = this.props
