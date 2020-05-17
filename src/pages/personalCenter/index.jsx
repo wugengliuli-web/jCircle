@@ -17,10 +17,6 @@ class PersonalCenter extends Component {
         title: '我的发布',
         url: '/pages/myRelease/index'
     }, {
-        icon: message,
-        title: '我的消息',
-        url: ''
-    }, {
         icon: application,
         title: '发布动态',
         url: '/pages/releaseDynamics/index'

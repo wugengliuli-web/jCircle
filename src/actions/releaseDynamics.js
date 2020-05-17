@@ -7,7 +7,7 @@ export const addDynamicAction = (userID, value, poster) => {
     return async dispatch => {
         const date = new Date()
         const res = await Taro.request({
-            url: DEVELOP_URL + '/theme/add',
+            url: DEVELOP_URL + 'theme/add',
             method: 'POST',
             data: {
                 wexId: userID,

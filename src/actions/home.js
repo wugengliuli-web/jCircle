@@ -9,7 +9,7 @@ import {
 export const getHomeInfoAction = (pageIndex, size, wxID = '') => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + '/theme/pageListInfo',
+            url: DEVELOP_URL + 'theme/pageListInfo',
             data: {
                 currentPage: pageIndex,
                 pageSize: size
@@ -45,7 +45,7 @@ export const getHomeInfoAction = (pageIndex, size, wxID = '') => {
 export const setHeartAction = (userId, dynamicID, isHeart, index) => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + `${isHeart ? '/approve/praise' : '/approve/cancel' }`,
+            url: DEVELOP_URL + `${isHeart ? 'approve/praise' : 'approve/cancel' }`,
             method: `${isHeart ? 'POST' : 'PUT'}`,
             data: {
                 wexId: userId,

@@ -15,7 +15,7 @@ export const setUserInfoAction = info => {
 export const login = body => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + '/user/login',
+            url: DEVELOP_URL + 'user/login',
             method: 'PUT',
             data: body
         })

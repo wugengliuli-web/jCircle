@@ -33,7 +33,7 @@ class TabBar extends Component {
                         selectedImage: homepage_sel,
                         image: homepage_unsel
                     }, {
-                        title: '易赞',
+                        title: '推荐',
                         selectedImage: Yizan_sel,
                         image: Yizan_unsel
                     }, {

@@ -9,6 +9,9 @@ import {
     setHeartAction,
     setCommentAction
 } from '../../actions/home'
+import {
+    delReleaseAction
+} from '../../actions/myRelease'
 //动态组件
 @connect(({ userInfo }) => ({ userInfo }))
 class Dynamic extends Component {
@@ -28,7 +31,8 @@ class Dynamic extends Component {
             time,
             isHeart,
             index: key,
-            isMy
+            isMy,
+            dynamicID
         } = this.props
         //最多只显示3张图片
         poster = poster ? poster.slice(0, 3) : []
@@ -42,6 +46,14 @@ class Dynamic extends Component {
                         <View className="name">{name}</View>
                         <View className="time">{time}</View>
                     </View>
+                    {
+                        isMy ?
+                        <View className="delIcon" onClick={() => this.delRelease(key, dynamicID)}>
+                            <AtIcon value={'trash'} size='16' color={'red'}></AtIcon>
+                        </View>
+                        :
+                        null
+                    }
                 </View>
                 <View className="contentWrapper">
                     <View className="textWrapper">
@@ -229,6 +241,21 @@ class Dynamic extends Component {
             //没有授权就跳转到登录页面
             Taro.redirectTo({
                 url: '/pages/login/index'
+            })
+        }
+    }
+
+    //删除动态
+    delRelease = async (index, key) => {
+        const dispatch = this.props.dispatch
+        try {
+            const action = delReleaseAction(index, key)
+            const res = await dispatch(action)
+        } catch(err) {
+            Taro.showToast({
+                title: '删除失败',
+                icon: 'none',
+                duration: 2000
             })
         }
     }

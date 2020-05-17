@@ -6,6 +6,12 @@
     background-color: #fff;
     .header {
         display: flex;
+        position: relative;
+        .delIcon {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
         .left {
             display: flex;
             align-items: center;

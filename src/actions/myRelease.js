@@ -1,27 +1,46 @@
-import { SET_MYRELEASE } from '../constants/myRelease'
+import { SET_MYRELEASE, DEL_MYRELEASE } from '../constants/myRelease'
 import Taro from '@tarojs/taro'
 import { DEVELOP_URL } from '../lib/url'
-export const getMyReleaseAction = (id, size, pageIndex, nickName, avatarUrl) => {
+export const getMyReleaseAction = (id, size, pageIndex) => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + '/theme/add',
+            url: DEVELOP_URL + 'theme/pageListInfo',
             data: {
-                id,
-                size,
-                pageIndex,
-                nickName,
-                avatarUrl
+                wexId: id,
+                currentPage: pageIndex,
+                pageSize: size
             }
         })
-        const { data: { result, data } } = res
-        data.sort((a,b) => -a.time.localeCompare(b.time))
-        if(result === 0) {
+        let { data: { data: { rows }, code } } = res
+        // data.sort((a,b) => -a.time.localeCompare(b.time))
+        if(code === 0) {
             await dispatch({
                 type: SET_MYRELEASE,
-                data
+                data: rows,
+                pageIndex
             })
             return true
         }
+        return false
+    }
+}
+
+export const delReleaseAction = (index, key) => {
+    return async dispatch => {
+        const res = await Taro.request({
+            url: DEVELOP_URL + 'theme/del',
+            method: 'delete',
+            data: {
+                id: key
+            }
+        })
+        const { data: { code } } = res
+        if(code === 0) {
+            await dispatch({
+                type: DEL_MYRELEASE,
+                index
+            })
+        } 
         return false
     }
 }
