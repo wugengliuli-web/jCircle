@@ -1,0 +1,31 @@
+@import "~taro-ui/dist/style/components/tab-bar.scss";
+@import "~taro-ui/dist/style/components/badge.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+@import "~taro-ui/dist/style/components/segmented-control.scss";
+
+
+page{
+  background:rgba(245,246,250,1);
+
+}
+.itemView{
+  padding: 15px;
+  margin: 16px 0;
+  background-color: #fff;
+  border-radius: 3%;
+  .itemTitle{
+    padding: 10px;
+  }
+  .itemIntro{
+    padding: 20px;
+  }
+}
+.more {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+
+
+
