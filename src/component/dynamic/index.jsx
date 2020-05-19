@@ -251,6 +251,19 @@ class Dynamic extends Component {
         try {
             const action = delReleaseAction(index, key)
             const res = await dispatch(action)
+            if(res) {
+                Taro.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000
+                })
+            } else {
+                Taro.showToast({
+                    title: '删除失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
         } catch(err) {
             Taro.showToast({
                 title: '删除失败',

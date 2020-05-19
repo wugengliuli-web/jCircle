@@ -28,7 +28,7 @@ export const getMyReleaseAction = (id, size, pageIndex) => {
 export const delReleaseAction = (index, key) => {
     return async dispatch => {
         const res = await Taro.request({
-            url: DEVELOP_URL + 'theme/del',
+            url: DEVELOP_URL + 'theme/del?id=' + key,
             method: 'delete',
             data: {
                 id: key
@@ -40,6 +40,7 @@ export const delReleaseAction = (index, key) => {
                 type: DEL_MYRELEASE,
                 index
             })
+            return true
         } 
         return false
     }

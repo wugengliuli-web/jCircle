@@ -22,9 +22,10 @@ export const myRelease = (state = InitState, action) => {
             }
         case DEL_MYRELEASE:
             info.splice(action.index, 1)
+            console.log(info, action.index)
             return {
                 ...state,
-                info
+                release: info
             }
         case add_dynamic:
             return {
