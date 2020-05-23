@@ -20,14 +20,14 @@ export const recommend = (state=InitState,action) =>{
       return{
         ...state,
         bookPageIndex:state.bookPageIndex+1,
-        hasBookMore: data.book_row.length === 10,
+        hasBookMore: data.book_row.length === 3,
         bookRow:data.currentPage === 1 ? data.book_row : bookRow.concat(data.book_row),
       };
     case SET_FILM_DATA:
       return {
         ...state,
-        filmPageIndex:state.bookPageIndex+1,
-        hasFilmMore: data.film_row.length === 10,
+        filmPageIndex:state.filmPageIndex+1,
+        hasFilmMore: data.film_row.length === 3,
         filmRow:data.currentPage === 1 ? data.film_row : filmRow.concat(data.film_row),
       };
     default:

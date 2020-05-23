@@ -28,11 +28,11 @@ class Recommend extends Component {
     const {dispatch,recommend:{bookPageIndex,filmPageIndex}} = this.props;
     const bookPageParams = {
       currentPage:  1,
-      pageSize: 10
+      pageSize: 3
     };
     const filmPageParams = {
       currentPage:  1,
-      pageSize: 10
+      pageSize: 3
     };
     if(isMore){
       bookPageParams.currentPage=bookPageIndex;
