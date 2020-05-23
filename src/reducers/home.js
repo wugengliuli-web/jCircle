@@ -20,7 +20,7 @@ export const home = (state = InitState, action) => {
                 ...state,
                 info: action.pageIndex === 1 ? data : info.concat(data),
                 hasMore: data.length === 6 ? true : false,
-                pageIndex: state.pageIndex + 1
+                pageIndex: action.pageIndex === 1 ? 1 : state.pageIndex + 1
             }
         case set_heart:
             let { isHeart, index } = data

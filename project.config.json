@@ -4,7 +4,7 @@
 	"description": "j圈子",
 	"appid": "wx8277878a59fc7a3c",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": false,
 		"minified": false,

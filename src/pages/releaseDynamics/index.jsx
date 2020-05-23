@@ -85,6 +85,9 @@ class ReleaseDynamics extends Component {
         try {
             let { userInfo: { iv }, dispatch } = this.props
             let { val, poster } = this.state
+            poster = poster.map(item => {
+                return 'data:image/jpeg;base64,' +  wx.getFileSystemManager().readFileSync(item, "base64")
+            })
             const action = addDynamicAction(iv, val, poster)
             const res = await dispatch(action)
             if(res) {

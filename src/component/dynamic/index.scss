@@ -38,6 +38,8 @@
     .contentWrapper {
         margin-top: 16px;
         .textWrapper {
+            word-wrap: break-word;
+            word-break: normal;
             font-size: 30px;
             color:rgba(0,0,0,0.87);
         }
