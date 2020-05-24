@@ -22,3 +22,18 @@ export const addDynamicAction = (userID, value, poster) => {
         return code === 0
     }
 }
+
+
+export const uploadFileAction = filePath => {
+    return async dispatch => {
+        const res = await Taro.uploadFile({
+            url: DEVELOP_URL + '/Images/upload',
+            filePath,
+            name: 'file'
+        })
+        let { data } = res
+        data = JSON.parse(data)
+        const { code, msg } = data
+        return msg
+    }
+}

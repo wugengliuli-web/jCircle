@@ -12,6 +12,10 @@ import {
 import {
     delReleaseAction
 } from '../../actions/myRelease'
+import { DEVELOP_URL } from '../../lib/url'
+
+const IMG_URL = DEVELOP_URL + 'images/'
+
 //动态组件
 @connect(({ userInfo }) => ({ userInfo }))
 class Dynamic extends Component {
@@ -36,6 +40,7 @@ class Dynamic extends Component {
         } = this.props
         //最多只显示3张图片
         poster = poster ? poster.slice(0, 3) : []
+        poster = poster.map(item => IMG_URL + item)
         return (
             <View className="dynamicContainer">
                 <View className="header">
@@ -116,6 +121,7 @@ class Dynamic extends Component {
     //浏览图片
     viewImage = index => {
         let { poster } = this.props
+        poster = poster.map(item => IMG_URL + item)
         Taro.previewImage({
             current: poster[index],
             urls: poster

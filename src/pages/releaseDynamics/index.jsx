@@ -4,7 +4,7 @@ import './index.scss'
 import { AtTextarea, AtButton } from 'taro-ui'
 import add_poster from '../../static/img/add_poster.png'
 import { connect } from '@tarojs/redux'
-import { addDynamicAction } from '../../actions/releaseDynamics'
+import { addDynamicAction, uploadFileAction } from '../../actions/releaseDynamics'
 
 @connect(({ userInfo }) => ({ userInfo }))
 class ReleaseDynamics extends Component {
@@ -77,18 +77,24 @@ class ReleaseDynamics extends Component {
         })
     }
 
+    upLoadFile = async filePath => {
+        const { dispatch } = this.props
+        const action = await uploadFileAction(filePath)
+        const res = await dispatch(action)
+        return res
+    }
+
 
     submit = async () => {
         this.setState({
             loading: true
         })
         try {
+            //先上传图片
             let { userInfo: { iv }, dispatch } = this.props
             let { val, poster } = this.state
-            poster = poster.map(item => {
-                return 'data:image/jpeg;base64,' +  wx.getFileSystemManager().readFileSync(item, "base64")
-            })
-            const action = addDynamicAction(iv, val, poster)
+            const imgRes = await Promise.all(poster.map(item => this.upLoadFile(item)))
+            const action = addDynamicAction(iv, val, imgRes)
             const res = await dispatch(action)
             if(res) {
                 Taro.showToast({
