@@ -17,6 +17,8 @@ class ReleaseDynamics extends Component {
         loading: false
     }
 
+    maxSize = 1024 * 1024 * 1
+
     render() {
         let { poster, loading, val } = this.state
         return (
@@ -58,8 +60,17 @@ class ReleaseDynamics extends Component {
             const res = await Taro.chooseImage({
                 count: 1
             })
-            let { tempFilePaths } = res
+            let { tempFilePaths, tempFiles } = res
             let { poster } = this.state
+            const { size } = tempFiles[0]
+            if(size > this.maxSize) {
+                Taro.showToast({
+                    title: '图片太大,限制1MB',
+                    icon: 'none',
+                    duration: 2000
+                })
+                return 
+            }
             poster.push(tempFilePaths[0])
             this.setState({
                 poster
