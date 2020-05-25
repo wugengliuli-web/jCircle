@@ -7,6 +7,7 @@ import activity from '../../static/img/activity.png'
 import { AtIcon } from 'taro-ui'
 import message from '../../static/img/message.png'
 import application from '../../static/img/application.png'
+import personalization from '../../static/img/personalization.png'
 @connect(({ userInfo }) => ({ userInfo }))
 class PersonalCenter extends Component {
     config = {
@@ -20,6 +21,10 @@ class PersonalCenter extends Component {
         icon: application,
         title: '发布动态',
         url: '/pages/releaseDynamics/index'
+    },{
+        icon:personalization,
+        title:'专业书籍查询',
+        url: '/pages/majorBook/index'
     }]
     render() {
         let {

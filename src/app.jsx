@@ -24,7 +24,8 @@ class App extends Component {
       'pages/personalCenter/index',
       'pages/releaseDynamics/index',
       'pages/myRelease/index',
-      'pages/recommend/index'
+      'pages/recommend/index',
+      'pages/majorBook/index'
     ],
     window: {
       backgroundTextStyle: 'light',

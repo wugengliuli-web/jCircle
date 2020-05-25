@@ -152,7 +152,6 @@ class Recommend extends Component {
   render() {
     let {loading} = this.state;
     let {recommend:{bookRow,filmRow,hasBookMore,hasFilmMore}}=this.props;
-    console.log(this.props)
     return (
       <View className='container'>
         <AtSegmentedControl
